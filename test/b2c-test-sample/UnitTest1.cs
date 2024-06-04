@@ -1,6 +1,5 @@
 using b2c_test_sample.Framework;
 using System.Net;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace b2c_test_sample

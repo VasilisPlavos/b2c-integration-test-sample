@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.AzureAD.Testing;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace b2c_test_sample.Framework
 {

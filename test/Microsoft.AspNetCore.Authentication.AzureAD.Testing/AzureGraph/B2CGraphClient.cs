@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.Testing
 {
@@ -54,11 +54,11 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.Testing
 
         private async Task<string> GraphLogin()
         {
-            var context = new AuthenticationContext($"https://login.microsoftonline.com/{_graphOptions.Domain}");
-            var credential = new ClientCredential(_graphOptions.ClientId, _graphOptions.ClientSecret);
-            var result = await context.AcquireTokenAsync("https://graph.windows.net/", credential);
-
-            return result.AccessToken;
+            //var context = new AuthenticationContext($"https://login.microsoftonline.com/{_graphOptions.Domain}");
+            //var credential = new ClientCredential(_graphOptions.ClientId, _graphOptions.ClientSecret);
+            //var result = await context.AcquireTokenAsync("https://graph.windows.net/", credential);
+            return "";
+            //return result.AccessToken;
         }
 
         public Task<string> GetAccessTokenAsync(string username, string password)

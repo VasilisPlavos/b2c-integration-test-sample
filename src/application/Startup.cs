@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using System.Security.Claims;
 
 namespace application
 {
@@ -56,11 +48,13 @@ namespace application
                 });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
+
+           // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -73,14 +67,11 @@ namespace application
             }
 
             IdentityModelEventSource.ShowPII = true;
-
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.Use((ctx, next) =>
-            {
-                return next();
-            });
-            app.UseMvc();
+            app.Use((_, next) => next());
+            app.UseEndpoints(e => { e.MapControllers(); });
         }
     }
 }
